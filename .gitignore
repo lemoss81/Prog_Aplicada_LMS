@@ -1,0 +1,20 @@
+# Ambientes virtuais
+venv/
+.venv/
+env/
+
+# Cache do Python
+__pycache__/
+*.pyc
+
+# Variáveis de ambiente
+.env
+
+# Ignorar a pasta de dados se os TIF/SHP forem muito pesados para o GitHub
+# servidor_web/dados/
+
+# Pastas e materiais de aula ignorados
+00_atividades_extras_sala_de_aula/
+1projeto_pyqt_qgis/
+1Slides_Materiais/
+Aulas/
