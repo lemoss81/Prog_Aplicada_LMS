@@ -1,8 +1,10 @@
 import streamlit as st 
 import geopandas as gpd 
 import leafmap.foliumap as leafmap 
-import os \
+import os
+import ssl
 
+ssl._create_default_https_context = ssl._create_unverified_context
 caminho_tif = "servidor_web/dados/carta106.tif" 
 caminho_shp = "servidor_web/dados/carta106.shp" 
 google_url = "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}" 
