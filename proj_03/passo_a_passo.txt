@@ -1,0 +1,37 @@
+(1) -- Com o Docker Desktop instalado e aberto no seu Windows, esse comando funcionará perfeitamente:
+
+docker run --name postgis_geobase -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=12345678 -e POSTGRES_DB=geobase -p 5432:5432 -d postgis/postgis
+
+
+
+(2) -- MacBook (M1/M2 ... ):
+
+docker run --name postgis_geobase \
+  --platform linux/amd64 \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=12345678 \
+  -e POSTGRES_DB=geobase \
+  -p 5432:5432 \
+  -d postgis/postgis
+
+(3) -- Caso feche ou encerre, execute:
+    docker start postgis_geobase
+
+(4) -- Resumo:
+
+docker run: É a instrução principal para criar e iniciar um novo contêiner.
+--name postgis_geobase: Batiza o seu contêiner com esse nome, facilitando parar, iniciar ou deletar ele depois.
+-e POSTGRES_USER=postgres: O -e (environment) define uma variável de ambiente. Aqui, ele cria o usuário administrador do banco.
+-e POSTGRES_PASSWORD=12345678: Define a senha de acesso para o usuário administrador.
+-e POSTGRES_DB=geobase: Diz ao PostgreSQL para já criar automaticamente um banco de dados vazio com este nome ao iniciar.
+-p 5432:5432: Mapeia a porta. A porta 5432 do seu computador (esquerda) vai se comunicar diretamente com a porta 5432 de dentro do contêiner (direita). É isso que permite que o Python ou o QGIS acessem o banco.
+-d: Significa detached (desanexado). Faz o contêiner rodar silenciosamente em segundo plano, deixando o terminal livre para você continuar usando.
+postgis/postgis: É a imagem (o "molde" ou pacote) que contém o sistema Linux, o PostgreSQL e a extensão PostGIS prontos para uso.
+
+(5) -- Passo a passo:
+    Para garantir que o script rode sem erros de ponta a ponta, confirme os seguintes pré-requisitos antes de executar:
+    Docker Ativo: O aplicativo Docker Desktop deve estar aberto e o contêiner postgis_geobase deve estar rodando (porta 5432).
+    QGIS Preparado: O QGIS deve estar aberto.
+    Dependências Corretas: As bibliotecas geopandas, sqlalchemy (versão < 2.0) e geoalchemy2 devem estar devidamente instaladas no motor Python interno do QGIS.
+    Uso do Editor: O código deve ser colado no Editor do Console Python do QGIS (ícone de bloco de notas), e não na linha de comando individual inferior.
+    Atenção ao Filtro: O script está programado para buscar a palavra
